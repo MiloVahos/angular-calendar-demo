@@ -20,3 +20,6 @@ tbody tr td:first-child,
 tbody tr td:last-child {
   background-color: whitesmoke;
 }
+.monthDay {
+  color: blue;
+}
