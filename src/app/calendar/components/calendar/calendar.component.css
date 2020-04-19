@@ -15,11 +15,20 @@ tr th {
 tbody td {
   width: 14.28%;
   height: 100px;
+  color: black;
 }
 tbody tr td:first-child,
 tbody tr td:last-child {
   background-color: whitesmoke;
+  color: blue;
+}
+.monthName {
+  justify-content: center;
+  color: teal;
+  font-size: 40px;
+  font-weight: bold;
+  align-items: center;
 }
 .monthDay {
-  color: blue;
+  color: lightgray !important;
 }

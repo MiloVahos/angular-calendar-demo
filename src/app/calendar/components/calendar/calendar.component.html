@@ -1,3 +1,6 @@
+<div class="row monthName">
+  <p>{{ month }}</p>
+</div>
 <table class="calendar-table table table-bordered">
   <thead>
     <tr>
@@ -12,7 +15,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let week of myCalendar; index as i;">
-      <td *ngFor="let day of week; index as i;" [ngClass]="{'monthDay' : day.belonsCurrent}" >{{ day.dayNumber }}</td>
+      <td *ngFor="let day of week; index as i;" 
+          [ngClass]="{'monthDay' : day.belongsCurrent}">
+            {{ day.dayNumber }}
+      </td>
     </tr>
   </tbody>
 </table>

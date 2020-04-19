@@ -11,12 +11,14 @@ export class CalendarComponent implements OnInit {
 
   momentCalendar = [];
   myCalendar = [];
+  month: string;
 
   constructor() { }
 
   ngOnInit() {
     const startWeek = moment().startOf('month').week();
     const endWeek = moment().endOf('month').week();
+    this.month = moment().format('MMMM');
     for ( let week = startWeek; week <= endWeek; week++ ) {
       this.momentCalendar.push({
         week,
@@ -34,7 +36,7 @@ export class CalendarComponent implements OnInit {
       week.days.forEach( day => {
         const d: Day = {
           dayNumber: day.format('D'),
-          belonsCurrent: (day.month() === moment().month()) ? true : false,
+          belongsCurrent: (day.month() === moment().month()) ? false : true
         };
         w.push(d);
       });
