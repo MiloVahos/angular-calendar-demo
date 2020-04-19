@@ -1,0 +1,22 @@
+.calendar-table {
+  margin: 0 auto;
+  width: 1000px;
+}
+thead {
+  text-align: center;
+}
+thead th {
+  background-color: teal;
+  color: white;
+}
+tr th {
+  width: 14.28%;
+}
+tbody td {
+  width: 14.28%;
+  height: 100px;
+}
+tbody tr td:first-child,
+tbody tr td:last-child {
+  background-color: whitesmoke;
+}
