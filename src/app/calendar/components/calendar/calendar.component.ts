@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Day } from '../../models/day.model';
+import { ShareDataService } from '../../../shared/services/share-data.service';
 
 @Component({
   selector: 'app-calendar',
@@ -13,7 +14,9 @@ export class CalendarComponent implements OnInit {
   myCalendar = [];
   month: string;
 
-  constructor() { }
+  constructor(private shareDataService: ShareDataService) {
+    this.shareDataService.currentData.subscribe( (data) => this.saveReminder(data) );
+  }
 
   ngOnInit() {
     const startWeek = moment().startOf('month').week();
@@ -25,9 +28,7 @@ export class CalendarComponent implements OnInit {
         days: Array(7).fill(0).map((n, i) => moment().week(week).startOf('week').clone().add(n + i, 'day')),
       });
     }
-    console.log(this.momentCalendar);
     this.buildMyCalendar();
-    console.log(this.myCalendar);
   }
 
   buildMyCalendar() {
@@ -44,5 +45,8 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+  saveReminder(value: any) {
+    console.log(value);
+  }
 
 }

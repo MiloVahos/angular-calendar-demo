@@ -1,16 +1,70 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Milo Calendar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <div class="my-2 my-lg-0">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="button">Add reminder</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="open(content)">Add reminder</button>
       </div>
     </ul>
   </div>
 </nav>
 <div class="content">
   <router-outlet></router-outlet>
-</div>   
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">NEW REMINDER</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="saveReminder()">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Add a description (Max 30 characters)"
+                maxlength="30" formControlName="description">
+      </div>
+      <div class="form-group">
+        <label for="day">Date</label>
+        <input type="date" class="form-control" id="day" name="day" value="2018-07-22"
+               [min]="minDate" [max]="maxDate" formControlName="day">
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="startTime">Start time</label>
+            <input type="time" class="form-control" id="startTime" name="startTime"
+                   min="00:00" max="24:00" formControlName="startTime">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div class="form-group">
+              <label for="endTime">End time</label>
+              <input type="time" class="form-control" id="endTime" name="endTime"
+                     min="00:00" max="24:00" formControlName="endTime">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <select class="form-control" id="city" formControlName="city">
+          <option *ngFor="let city of cities">
+            {{ city }}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save')" 
+            [disabled]="!form.valid">Save Reminder</button>
+  </div>
+</ng-template>
