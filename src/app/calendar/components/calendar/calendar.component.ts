@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Day } from '../../models/day.model';
 import { ShareDataService } from '../../../shared/services/share-data.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-calendar',
@@ -37,7 +38,8 @@ export class CalendarComponent implements OnInit {
       week.days.forEach( day => {
         const d: Day = {
           dayNumber: day.format('D'),
-          belongsCurrent: (day.month() === moment().month()) ? false : true
+          belongsCurrent: (day.month() === moment().month()) ? false : true,
+          reminders: []
         };
         w.push(d);
       });
@@ -46,7 +48,22 @@ export class CalendarComponent implements OnInit {
   }
 
   saveReminder(value: any) {
-    console.log(value);
+    if ( value && !_.isEmpty(value) && !_.isUndefined(value) ) {
+      const date = moment(value.date, 'YYYY-MM-DD');
+      const day = date.format('D');
+      const month = parseInt(date.format('M'), 10);
+      const year = parseInt(date.format('YYYY'), 10);
+      const currentDate = new Date();
+      if ( year === currentDate.getFullYear() && month === (currentDate.getMonth() + 1) ) {
+        this.myCalendar.forEach( week => {
+          week.forEach( d => {
+            if ( !d.belongsCurrent && d.dayNumber === day ) {
+              d.reminders.push(value);
+            }
+          });
+        });
+      }
+    }
   }
 
 }
