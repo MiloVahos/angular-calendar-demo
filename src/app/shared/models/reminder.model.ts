@@ -4,4 +4,5 @@ export class Reminder {
   public startTime: string;
   public endTime: string;
   public city: string;
+  public weather: string;
 }

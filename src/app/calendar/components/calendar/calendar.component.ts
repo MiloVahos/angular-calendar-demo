@@ -41,7 +41,7 @@ export class CalendarComponent implements OnInit {
           belongsCurrent: (day.month() === moment().month()) ? false : true,
           reminders: [
             { description: 'Esto es una descripcion de 30', date: new Date(),
-              startTime: '00:00', endTime: '00:01', city: 'MDE' }
+              startTime: '00:00', endTime: '00:01', city: 'MDE', weather: 'Rain' }
           ]
         };
         w.push(d);
