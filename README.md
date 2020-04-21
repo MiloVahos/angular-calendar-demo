@@ -3,28 +3,27 @@
 ## Description
 Calendar demo project with Angular 8 and Bootstrap
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## How to use
+- Download the project
+- run `npm i`
+- run `ng serve -o`
 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Features in master branch
+- Ability to add reminder
+- Display reminders in correct time order
+- Allow select color
+- Weather service call
+- Update reminder: I'm sorry for not creating a generic modal component, I'm using ng bootstrap, that was a
+  wrong decision, that library makes very difficult to open the modal from another component, and I didn't have time to change that. I usually use angular material and that problem doesn't exists.
+- Some unit testing in the home.spec.ts
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Features in develop branch
+- Same as master
+- The idea was to show that I know how to work using git flow strategy, but I didn't have time to add 
+  the extra features you request. Anyway, you can see in the repo every feature in its own branch.
 
 - Developer: Camilo Vahos

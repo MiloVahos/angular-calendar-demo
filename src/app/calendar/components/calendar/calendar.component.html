@@ -14,13 +14,98 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let week of myCalendar; index as i;">
-      <td *ngFor="let day of week; index as i;" 
+    <tr *ngFor="let week of myCalendar; index as w;">
+      <td *ngFor="let day of week; index as d;" 
           [ngClass]="{'monthDay' : day.belongsCurrent}">
           <div class="number">{{ day.dayNumber }}</div>
-          <p class="reminder" *ngFor="let reminder of day.reminders"
+          <p class="reminder" *ngFor="let reminder of day.reminders; index as r" 
+            (click)="open(content, reminder, w, d, r)"
             [ngStyle]="{'background-color':reminder.color}">{{ reminder.description }}</p>
       </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Reminder</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Add a description (Max 30 characters)"
+                maxlength="30" formControlName="description">
+        <div class="invalid-feedback d-block" 
+            *ngIf="form.controls['description'].hasError('required') && form.get('description').touched">
+          Please provide a valid description.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="day">Date</label>
+        <input type="date" class="form-control" id="day" name="day" value="2018-07-22"
+               [min]="minDate" [max]="maxDate" formControlName="day">
+        <div class="invalid-feedback d-block" 
+          *ngIf="form.controls['day'].hasError('required') && form.get('day').touched">
+          Please provide a valid date.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="startTime">Start time</label>
+            <input type="time" class="form-control" id="startTime" name="startTime"
+                   min="00:00" max="24:00" formControlName="startTime">
+            <div class="invalid-feedback d-block" 
+                *ngIf="form.controls['startTime'].hasError('required') && form.get('startTime').touched">
+              Please provide a valid time.
+            </div>
+            <div class="invalid-feedback d-block" 
+                *ngIf="form.hasError('range') && form.get('startTime').touched && form.get('endTime').touched">
+              Start time should be before end time
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div class="form-group">
+              <label for="endTime">End time</label>
+              <input type="time" class="form-control" id="endTime" name="endTime"
+                     min="00:00" max="24:00" formControlName="endTime">
+              <div class="invalid-feedback d-block" 
+                  *ngIf="form.controls['endTime'].hasError('required') && form.get('endTime').touched">
+                Please provide a valid time.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="city">City</label>
+            <select class="form-control" id="city" formControlName="city">
+              <option *ngFor="let city of cities">
+                {{ city }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="city">Color</label>
+            <input class="form-control" [(colorPicker)]="color" [style.background]="color"
+                   [cpOutputFormat]="'hex'" [(colorPicker)]="color"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Update')" 
+            [disabled]="!form.valid">Update</button>
+  </div>
+</ng-template>
