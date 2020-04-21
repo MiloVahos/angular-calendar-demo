@@ -39,7 +39,10 @@ export class CalendarComponent implements OnInit {
         const d: Day = {
           dayNumber: day.format('D'),
           belongsCurrent: (day.month() === moment().month()) ? false : true,
-          reminders: []
+          reminders: [
+            { description: 'Esto es una descripcion de 30', date: new Date(),
+              startTime: '00:00', endTime: '00:00', city: 'MDE' }
+          ]
         };
         w.push(d);
       });

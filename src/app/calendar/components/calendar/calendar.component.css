@@ -16,6 +16,8 @@ tbody td {
   width: 14.28%;
   height: 100px;
   color: black;
+  margin: 0;
+  padding: 0;
 }
 tbody tr td:first-child,
 tbody tr td:last-child {
@@ -31,4 +33,25 @@ tbody tr td:last-child {
 }
 .monthDay {
   color: lightgray !important;
+}
+.number {
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 2px;
+}
+.reminder {
+  border-top: 1px solid #b2dba1;
+  border-bottom: 1px solid #b2dba1;
+  background-image: linear-gradient(to bottom, #dff0d8 0px, #c8e5bc 100%);
+  background-repeat: repeat-x;
+  color: #3c763d;
+  border-width: 1px;
+  font-size: .75em;
+  padding: 0 .75em;
+  line-height: 1em;
+  margin: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 1px;
 }

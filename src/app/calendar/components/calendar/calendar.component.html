@@ -17,7 +17,8 @@
     <tr *ngFor="let week of myCalendar; index as i;">
       <td *ngFor="let day of week; index as i;" 
           [ngClass]="{'monthDay' : day.belongsCurrent}">
-            {{ day.dayNumber }}
+          <div class="number">{{ day.dayNumber }}</div>
+          <p class="reminder" *ngFor="let reminder of day.reminders">{{ reminder.description }}</p>
       </td>
     </tr>
   </tbody>
