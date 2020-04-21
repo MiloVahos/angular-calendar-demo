@@ -40,11 +40,10 @@ tbody tr td:last-child {
   margin-left: 2px;
 }
 .reminder {
-  border-top: 1px solid #b2dba1;
-  border-bottom: 1px solid #b2dba1;
-  background-image: linear-gradient(to bottom, #dff0d8 0px, #c8e5bc 100%);
-  background-repeat: repeat-x;
-  color: #3c763d;
+  border-top: 1px solid teal;
+  border-bottom: 1px solid teal;
+  color: white;
+  font-weight: bold;
   border-width: 1px;
   font-size: .75em;
   padding: 0 .75em;

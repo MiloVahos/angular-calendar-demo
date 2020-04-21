@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   today = moment().format('MM/DD/YYYY');
   cities = ['Bogotá', 'Medellín', 'Cartagena', 'Cali', 'Santa Marta', 'Barranquilla',
             'Pereira', 'Bucaramanga', 'Cúcuta'];
+  color = '#ffffff';
 
   constructor(private modalService: NgbModal,
               private shareDataService: ShareDataService,
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
       day: new FormControl( null, Validators.required ),
       startTime: new FormControl( null, Validators.required ),
       endTime: new FormControl( null, Validators.required ),
-      city: new FormControl( 'Bogotá' ),
+      city: new FormControl( 'Bogotá' )
     }, GenericValidations.validateTimesOrder('startTime', 'endTime'));
   }
 
@@ -65,6 +66,7 @@ export class HomeComponent implements OnInit {
       endTime: this.form.value.endTime,
       city: this.form.value.city,
       weather: await this.getWeather(this.form.value.city),
+      color: this.color,
     };
     this.form.reset();
     this.shareDataService.changeData(reminder);

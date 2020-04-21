@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { WeatherService } from './services/weather.service';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { WeatherService } from './services/weather.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ColorPickerModule,
   ],
   providers: [
     WeatherService,
