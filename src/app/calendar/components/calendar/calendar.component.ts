@@ -41,13 +41,33 @@ export class CalendarComponent implements OnInit {
           belongsCurrent: (day.month() === moment().month()) ? false : true,
           reminders: [
             { description: 'Esto es una descripcion de 30', date: new Date(),
-              startTime: '00:00', endTime: '00:00', city: 'MDE' }
+              startTime: '00:00', endTime: '00:01', city: 'MDE' }
           ]
         };
         w.push(d);
       });
       this.myCalendar.push(w);
     });
+  }
+
+  sortByTime(time1: string, time2: string) {
+    const hour1 = parseInt(time1.substring(0, 2), 10);
+    const min1 = parseInt(time1.substring(3, 5), 10);
+    const hour2 = parseInt(time2.substring(0, 2), 10);
+    const min2 = parseInt(time2.substring(3, 5), 10);
+    if ( hour1 < hour2 ) {
+      return -1;
+    } else if ( hour1 > hour2 ) {
+      return 1;
+    } else {
+      if ( min1 < min2 ) {
+        return -1;
+      } else if ( min1 > min2 ) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
   }
 
   saveReminder(value: any) {
@@ -62,6 +82,9 @@ export class CalendarComponent implements OnInit {
           week.forEach( d => {
             if ( !d.belongsCurrent && d.dayNumber === day ) {
               d.reminders.push(value);
+              d.reminders.sort((a , b) => {
+                return this.sortByTime(a.startTime, b.startTime);
+              });
             }
           });
         });
