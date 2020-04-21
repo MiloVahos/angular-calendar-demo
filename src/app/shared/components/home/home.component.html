@@ -29,11 +29,19 @@
         <label for="description">Description</label>
         <input type="text" class="form-control" id="description" placeholder="Add a description (Max 30 characters)"
                 maxlength="30" formControlName="description">
+        <div class="invalid-feedback d-block" 
+            *ngIf="form.controls['description'].hasError('required') && form.get('description').touched">
+          Please provide a valid description.
+        </div>
       </div>
       <div class="form-group">
         <label for="day">Date</label>
         <input type="date" class="form-control" id="day" name="day" value="2018-07-22"
                [min]="minDate" [max]="maxDate" formControlName="day">
+        <div class="invalid-feedback d-block" 
+          *ngIf="form.controls['day'].hasError('required') && form.get('day').touched">
+          Please provide a valid date.
+        </div>
       </div>
       <div class="row">
         <div class="col">
@@ -41,6 +49,14 @@
             <label for="startTime">Start time</label>
             <input type="time" class="form-control" id="startTime" name="startTime"
                    min="00:00" max="24:00" formControlName="startTime">
+            <div class="invalid-feedback d-block" 
+                *ngIf="form.controls['startTime'].hasError('required') && form.get('startTime').touched">
+              Please provide a valid time.
+            </div>
+            <div class="invalid-feedback d-block" 
+                *ngIf="form.hasError('range') && form.get('startTime').touched && form.get('endTime').touched">
+              Start time should be before end time
+            </div>
           </div>
         </div>
         <div class="col">
@@ -49,6 +65,10 @@
               <label for="endTime">End time</label>
               <input type="time" class="form-control" id="endTime" name="endTime"
                      min="00:00" max="24:00" formControlName="endTime">
+              <div class="invalid-feedback d-block" 
+                  *ngIf="form.controls['endTime'].hasError('required') && form.get('endTime').touched">
+                Please provide a valid time.
+              </div>
             </div>
           </div>
         </div>

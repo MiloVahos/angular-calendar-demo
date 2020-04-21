@@ -39,10 +39,7 @@ export class CalendarComponent implements OnInit {
         const d: Day = {
           dayNumber: day.format('D'),
           belongsCurrent: (day.month() === moment().month()) ? false : true,
-          reminders: [
-            { description: 'Esto es una descripcion de 30', date: new Date(),
-              startTime: '00:00', endTime: '00:01', city: 'MDE', weather: 'Rain', color: '#382998' }
-          ]
+          reminders: [],
         };
         w.push(d);
       });
@@ -71,7 +68,6 @@ export class CalendarComponent implements OnInit {
   }
 
   saveReminder(value: any) {
-    console.log(value);
     if ( value && !_.isEmpty(value) && !_.isUndefined(value) ) {
       const date = moment(value.date, 'YYYY-MM-DD');
       const day = date.format('D');
