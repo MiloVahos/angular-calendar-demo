@@ -60,7 +60,7 @@ export class CalendarComponent implements OnInit {
         const d: Day = {
           dayNumber: day.format('D'),
           belongsCurrent: (day.month() === moment().month()) ? false : true,
-          reminders: [],
+          reminders: [ ],
         };
         w.push(d);
       });
@@ -111,6 +111,7 @@ export class CalendarComponent implements OnInit {
   }
 
   open(content, reminder, w, d, r) {
+    console.log(reminder);
     this.reminder = reminder;
     this.form.controls.description.setValue(reminder.description);
     this.form.controls.startTime.setValue(reminder.startTime);
@@ -121,6 +122,7 @@ export class CalendarComponent implements OnInit {
       if ( result === 'Update' ) {
         this.updateReminder(w, d, r);
       }
+      this.form.reset();
     }, (reason) => console.log(reason));
   }
 
@@ -134,8 +136,13 @@ export class CalendarComponent implements OnInit {
       city: this.form.value.city,
       color: this.color,
     };
-    delete this.myCalendar[w][d].reminders[r];
-    this.saveReminder(reminder);
+    console.log(this.reminder, reminder);
+    if ( this.reminder.date !== reminder.date ) {
+      this.saveReminder(reminder);
+      this.myCalendar[w][d].reminders.splice(r);
+    } else {
+      this.myCalendar[w][d].reminders[r] = reminder;
+    }
   }
 
 }
